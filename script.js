@@ -4,13 +4,13 @@ let WS_NUM_1 = 0;
 let WS_NUM_2 = 0;
 let WS_RESULT = 0;
 
-function mainProcedure() {
+const mainProcedure = () => {
     initializeVariables();
     processCalculation();
 }
 
 // 変数の初期化
-function initializeVariables() {
+const initializeVariables = () => {
     WS_MODO = '';
     WS_NUM_1 = 0;
     WS_NUM_2 = 0;
@@ -18,7 +18,7 @@ function initializeVariables() {
 }
 
 // モーダル表示用関数
-function showModal(message, callback, hideInput = false) {
+const showModal = (message, callback, hideInput = false) => {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modal-message');
     const modalInput = document.getElementById('modal-input');
@@ -34,7 +34,7 @@ function showModal(message, callback, hideInput = false) {
         }, 1000);
     } else {
         modalInput.style.display = 'block';
-        modalInput.onkeydown = function (event) {
+        modalInput.onkeydown =  event => {
             if (event.key === 'Enter') {
                 const value = modalInput.value;
                 playSound('clickSound');  // エンターキー押下時にクリック音を再生
@@ -48,20 +48,20 @@ function showModal(message, callback, hideInput = false) {
 }
 
 // 計算処理の再帰関数
-function processCalculation() {
+const processCalculation = () => {
     selectCalculationMode();
 }
 
 // 計算モードの選択
-function selectCalculationMode() {
-    showModal("計算モードを選択してください: 1) 加算 2) 減算 3) 除算 4) 乗算", function (mode) {
+const selectCalculationMode = () => {
+    showModal("計算モードを選択してください: 1) 加算 2) 減算 3) 除算 4) 乗算",  mode  => {
         WS_MODO = mode;
         executeCalculationMode();
     });
 }
 
 // 計算モードに応じた処理の実行
-function executeCalculationMode() {
+const  executeCalculationMode = () => {
     switch (WS_MODO) {
         case '1':
             PROC_SOMAR();
@@ -82,7 +82,7 @@ function executeCalculationMode() {
 }
 
 // 結果表示
-function displayResult() {
+const displayResult = ()  => {
     showModal("計算結果: " + WS_RESULT, () => {
         continueProgram().then((cont) => {
             if (cont) {
@@ -95,9 +95,9 @@ function displayResult() {
 }
 
 // 続行有無の確認
-function continueProgram() {
+const continueProgram = () => {
     return new Promise((resolve) => {
-        showModal("続けますか？ (Sで続行、任意のキーで終了)", function (continueInput) {
+        showModal("続けますか？ (Sで続行、任意のキーで終了)", continueInput => {
             if (continueInput.toUpperCase() === 'S') {
                 resolve(true);
             } else {
@@ -108,15 +108,15 @@ function continueProgram() {
 }
 
 // 終了処理
-function endProcedure() {
+const endProcedure = () => {
     showModal("プログラムを終了します。", () => {}, true);
 }
 
 // 加算処理
-function PROC_SOMAR() {
-    showModal("第一数値を入力してください:", function (num1) {
+const PROC_SOMAR = () => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("第二数値を入力してください:", function (num2) {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 + WS_NUM_2;
             displayResult();
@@ -125,10 +125,10 @@ function PROC_SOMAR() {
 }
 
 // 減算処理
-function PROC_SUBTRAIR() {
-    showModal("第一数値を入力してください:", function (num1) {
+const PROC_SUBTRAIR = () => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("第二数値を入力してください:", function (num2) {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 - WS_NUM_2;
             displayResult();
@@ -137,10 +137,10 @@ function PROC_SUBTRAIR() {
 }
 
 // 除算処理
-function PROC_DIVIDIR() {
-    showModal("第一数値を入力してください:", function (num1) {
+const PROC_DIVIDIR = () => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("第二数値を入力してください:", function (num2) {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 / WS_NUM_2;
             displayResult();
@@ -149,10 +149,10 @@ function PROC_DIVIDIR() {
 }
 
 // 乗算処理
-function PROC_MULTIPLICAR() {
-    showModal("第一数値を入力してください:", function (num1) {
+const PROC_MULTIPLICAR = () => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("第二数値を入力してください:", function (num2) {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 * WS_NUM_2;
             displayResult();
@@ -160,14 +160,14 @@ function PROC_MULTIPLICAR() {
     });
 }
 
-function playSound(soundId) {
-    const sound = document.getElementById(soundId);
+const playSound = ()  =>{
+    const sound = document.getElementById('clickSound');
     sound.volume = 0.3; 
     sound.currentTime = 0;
     sound.play();
 }
 
-function toggleMusic() {
+const toggleMusic = () => {
     const bgm = document.getElementById('bgm');
     if (bgm.paused) {
         bgm.play();
