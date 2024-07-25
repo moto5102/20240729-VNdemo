@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易計算機</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>簡易計算機</h1>
+        <div class="button">
+         <button onclick="mainProcedure()">計算開始</button>
+         <button class="soundButton" onclick="toggleMusic()">BGM ON/OFF</button>
+         <audio id="bgm" loop>
+            <source src="./src/iwashiro_saezuri.mp3" type="audio/mp3">
+         </audio>
+         <audio id="clickSound" src="./src/item_1.mp3" preload="auto"></audio>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div id="modal-content" class="modal-content">
+            <p id="modal-message"></p>
+            <input type="text" id="modal-input" />
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+    
