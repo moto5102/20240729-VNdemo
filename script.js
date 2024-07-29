@@ -37,7 +37,7 @@ const showModal = (message, callback, hideInput = false) => {
         modalInput.onkeydown =  event => {
             if (event.key === 'Enter') {
                 const value = modalInput.value;
-                playSound('clickSound');  // エンターキー押下時にクリック音を再生
+                // playSound('clickSound');  // エンターキー押下時にクリック音を再生
                 modalInput.value = '';
                 modal.style.display = 'none';
                 callback(value);
