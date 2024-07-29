@@ -54,7 +54,7 @@ const processCalculation = () => {
 
 // 計算モードの選択
 const selectCalculationMode = () => {
-    showModal("Chọn chế độ tính toán: 1) Phép cộng 2) Phép trừ 3) Phép chia 4) Phép nhân",  mode  => {
+    showModal("計算モードを選択してください: 1) 加算 2) 減算 3) 除算 4) 乗算",  mode  => {
         WS_MODO = mode;
         executeCalculationMode();
     });
@@ -76,14 +76,14 @@ const  executeCalculationMode = () => {
             PROC_MULTIPLICAR();
             break;
         default:
-            showModal("Đã chọn chế độ không hợp lệ", processCalculation, true);
+            showModal("無効なモードが選択されました。", processCalculation, true);
             break;
     }
 }
 
 // 結果表示
 const displayResult = ()  => {
-    showModal("Kết quả tính toán: " + WS_RESULT, () => {
+    showModal("計算結果: " + WS_RESULT, () => {
         continueProgram().then((cont) => {
             if (cont) {
                 processCalculation();
@@ -97,11 +97,11 @@ const displayResult = ()  => {
 // 続行有無の確認
 const continueProgram = () => {
     return new Promise((resolve) => {
-        showModal("Bạn có muốn tiếp tục? (S để tiếp tục, phím bất kỳ để thoát)", continueInput => {
+        showModal("続けますか？ (Sで続行、任意のキーで終了)", continueInput => {
             if (continueInput.toUpperCase() === 'S') {
                 resolve(true);
             } else {
-                showModal("Thoát khỏi chương trình.", () => resolve(false), true);
+                showModal("プログラムを終了します。", () => resolve(false), true);
             }
         });
     });
@@ -109,14 +109,14 @@ const continueProgram = () => {
 
 // 終了処理
 const endProcedure = () => {
-    showModal("Thoát khỏi chương trình.", () => {}, true);
+    showModal("プログラムを終了します。", () => {}, true);
 }
 
 // 加算処理
 const PROC_SOMAR = () => {
-    showModal("Vui lòng nhập số đầu tiên:", num1 => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("Vui lòng nhập số thứ hai:", num2 => {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 + WS_NUM_2;
             displayResult();
@@ -126,9 +126,9 @@ const PROC_SOMAR = () => {
 
 // 減算処理
 const PROC_SUBTRAIR = () => {
-    showModal("Vui lòng nhập số đầu tiên:", num1 => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("Vui lòng nhập số thứ hai:", num2 => {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 - WS_NUM_2;
             displayResult();
@@ -138,9 +138,9 @@ const PROC_SUBTRAIR = () => {
 
 // 除算処理
 const PROC_DIVIDIR = () => {
-    showModal("Vui lòng nhập số đầu tiên:", num1 => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("Vui lòng nhập số thứ hai:", num2 => {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 / WS_NUM_2;
             displayResult();
@@ -150,9 +150,9 @@ const PROC_DIVIDIR = () => {
 
 // 乗算処理
 const PROC_MULTIPLICAR = () => {
-    showModal("Vui lòng nhập số đầu tiên:", num1 => {
+    showModal("第一数値を入力してください:", num1 => {
         WS_NUM_1 = parseFloat(num1);
-        showModal("Vui lòng nhập số thứ hai:", num2 => {
+        showModal("第二数値を入力してください:", num2 => {
             WS_NUM_2 = parseFloat(num2);
             WS_RESULT = WS_NUM_1 * WS_NUM_2;
             displayResult();
@@ -160,12 +160,12 @@ const PROC_MULTIPLICAR = () => {
     });
 }
 
-// const playSound = ()  =>{
-//     const sound = document.getElementById('clickSound');
-//     sound.volume = 0.3; 
-//     sound.currentTime = 0;
-//     sound.play();
-// }
+const playSound = ()  =>{
+    const sound = document.getElementById('clickSound');
+    sound.volume = 0.3; 
+    sound.currentTime = 0;
+    sound.play();
+}
 
 const toggleMusic = () => {
     const bgm = document.getElementById('bgm');
